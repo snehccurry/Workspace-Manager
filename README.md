@@ -9,4 +9,4 @@ a handy tool ig, i'll be merging it with helpbro anyways.
 
 
 
-I'd like to thank @JariPennanen https://github.com/Ciantic
+A great thanks to @JariPennanen https://github.com/Ciantic for the dll, and his project VirtualDesktopAccessor written in Rust. 
