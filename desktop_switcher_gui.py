@@ -101,11 +101,31 @@ desktop_button_frame=frame(x)
 desktop_button_frame.pack(side=LEFT)
 
 
+show_numbers_before_desktops= True
 
+
+#button_schemes are: button,button1,white_label_button
+button_scheme="button1"
+
+
+if(button_scheme=='button'):
+    button=button1
+elif(button_scheme=='white_label_button'):
+    button=white_label_button
+else:
+    pass
 for desktop in desktops:
     #print(desktop)
 
-    b1 = button(desktop_button_frame, text=f"{desktop}", command=lambda desktop=desktop: open_desktop_by_name(desktop))
+    #if show numbers is enabled. show below
+    #b1 = button(desktop_button_frame, text=f"{desktops[desktop]} {desktop}", command=lambda desktop=desktop: open_desktop_by_name(desktop))
+    
+
+    #if show numbers is not enabled, show the following
+    if(show_numbers_before_desktops==False):
+        b1 = button(desktop_button_frame, text=f"{desktop}", command=lambda desktop=desktop: open_desktop_by_name(desktop))
+    else:
+        b1 = button(desktop_button_frame, text=f"{desktops[desktop]}) {desktop}", command=lambda desktop=desktop: open_desktop_by_name(desktop))
     b1.config(font=('Segoe UI', 10),highlightthickness=0, takefocus=0)
     b1.pack(side=LEFT, padx=5)
     
@@ -174,8 +194,16 @@ required_height = max(button_heights)+2
 
 def place_dock(position):
     if(position=='center'):
+        x.update()
+        required_width=options_buttons_frame.winfo_reqwidth()+desktop_button_frame.winfo_reqwidth()
         center_width=int(screen_width_place/2)-int(required_width/2)
+        #orignal
+        #x.geometry(f"{required_width}x{required_height}+{center_width}+{screen_height_place}")
+
+        #test
+        
         x.geometry(f"{required_width}x{required_height}+{center_width}+{screen_height_place}")
+
     else:
         x.geometry(f"{required_width}x{required_height}+{screen_width_place-required_width}+{screen_height_place}")
 
