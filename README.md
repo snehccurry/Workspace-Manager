@@ -1,4 +1,4 @@
-# Desktop-Switcher
+# Desktop-Switcher/Workspace Manager
 An easy way to switch desktops from terminal.
 
 If you keep your virtual desktops organized then you'd know how painful it is to switch desktop on windows.
