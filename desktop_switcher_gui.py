@@ -76,21 +76,24 @@ def open_more_settings():
     apply_theme(settings_page,light_mode)
     make_rounded(settings_page)
     allow_mouse_drag(settings_page)
-    left_frame1=left_frame(settings_page)
-    left_frame1.forget()
-    left_frame1.pack(side=LEFT,fill=Y,ipadx=x.winfo_screenwidth()*0.02,ipady=0,pady=0)
-    left_frame1.update()
+    # left_frame1=left_frame(settings_page)
+    # left_frame1.forget()
+    # left_frame1.pack(side=LEFT,fill=Y,ipadx=x.winfo_screenwidth()*0.02,ipady=0,pady=0)
+    # left_frame1.update()
 
 
-    left_frame_buttons_list=[{"name":"hello", "command":do_nothing}]
-    for i in range(10):
-        left_frame_button_i=left_frame_button(frame_name=left_frame1,text=left_frame_buttons_list[0]["name"],command=left_frame_buttons_list[0]["command"])
-        left_frame_button_i.config(font=('SegoeUI',14))
+    # left_frame_buttons_list=[{"name":"hello", "command":do_nothing}]
+    # for i in range(10):
+    #     left_frame_button_i=left_frame_button(frame_name=left_frame1,text=left_frame_buttons_list[0]["name"],command=left_frame_buttons_list[0]["command"])
+    #     left_frame_button_i.config(font=('SegoeUI',14))
 
 
-    Label1=label(settings_page,text=f"DevChannel 1 user:{os.getlogin()}")
-    Label1.config(font=('Segoe UI',32))
-    Label1.pack(side=LEFT,anchor=NW,pady=30,padx=40)
+    # Label1=label(settings_page,text=f"DevChannel 1 user:{os.getlogin()}")
+    # Label1.config(font=('Segoe UI',32))
+    # Label1.pack(side=LEFT,anchor=NW,pady=30,padx=40)
+
+    label1=label(settings_page,text="Hold tight, your settings options will be made available soon.")
+    label1.place(relx = 0.5, rely = 0.5, anchor = CENTER)
 
     settings_page.mainloop()
 
@@ -101,7 +104,7 @@ desktop_button_frame=frame(x)
 desktop_button_frame.pack(side=LEFT)
 
 
-show_numbers_before_desktops= True
+show_numbers_before_desktops= False
 
 
 #button_schemes are: button,button1,white_label_button
@@ -138,27 +141,68 @@ for desktop in desktops:
 
 
 hidden=False
-def hide_unhide():
+user_choice_animate_hide_unhide=False
+def hide_unhide(animated = user_choice_animate_hide_unhide):
     global hidden
-    if(hidden==False):
-        #desktop_button_frame.pack_forget()
-        desktop_button_frame.pack_forget()
-        #b3.winfo_reqwidth() b0.winfo_reqwidth()
-        
-        x.geometry(f"{options_buttons_frame.winfo_reqwidth()}x{required_height}+{options_buttons_frame.winfo_rootx()}+{options_buttons_frame.winfo_rooty()}")
-        hidden=True
 
+    if(animated==False):
+        if(hidden==False):
+            #desktop_button_frame.pack_forget()
+            desktop_button_frame.pack_forget()
+            #b3.winfo_reqwidth() b0.winfo_reqwidth()
+            
+            x.geometry(f"{options_buttons_frame.winfo_reqwidth()}x{required_height}+{options_buttons_frame.winfo_rootx()}+{options_buttons_frame.winfo_rooty()}")
+            hidden=True
+
+        else:
+            
+            options_buttons_frame.pack_forget()
+            desktop_button_frame.pack(side=LEFT)
+            options_buttons_frame.pack()
+            x.geometry(f"{options_buttons_frame.winfo_reqwidth()+desktop_button_frame.winfo_reqwidth()}x{required_height}+{options_buttons_frame.winfo_rootx()-desktop_button_frame.winfo_reqwidth()}+{options_buttons_frame.winfo_rooty()}")
+            
+            global position
+            hidden=False
     else:
-        
-        options_buttons_frame.pack_forget()
-        desktop_button_frame.pack(side=LEFT)
-        options_buttons_frame.pack()
-        x.geometry(f"{options_buttons_frame.winfo_reqwidth()+desktop_button_frame.winfo_reqwidth()}x{required_height}+{options_buttons_frame.winfo_rootx()-desktop_button_frame.winfo_reqwidth()}+{options_buttons_frame.winfo_rooty()}")
-        
-        global position
-        hidden=False
-        
 
+        def hide_unhide():
+            global hidden
+            if hidden == False:
+                desktop_button_frame.pack_forget()
+                animate_hide(options_buttons_frame)
+                hidden = True
+            else:
+                options_buttons_frame.pack_forget()
+                desktop_button_frame.pack(side=LEFT)
+                options_buttons_frame.pack()
+                animate_show(options_buttons_frame)
+                hidden = False
+
+        def animate_hide(frame_to_hide):
+            width = frame_to_hide.winfo_reqwidth()
+            height = required_height
+            x_pos = options_buttons_frame.winfo_rootx()
+            y_pos = options_buttons_frame.winfo_rooty()
+            
+            for i in range(0, width + 1, 5):
+                x.geometry(f"{i}x{height}+{x_pos}+{y_pos}")
+                x.update()
+                time.sleep(0.01)
+
+        def animate_show(frame_to_show):
+            width = options_buttons_frame.winfo_reqwidth() + desktop_button_frame.winfo_reqwidth()
+            height = required_height
+            x_pos = options_buttons_frame.winfo_rootx() - desktop_button_frame.winfo_reqwidth()
+            y_pos = options_buttons_frame.winfo_rooty()
+            
+            for i in range(options_buttons_frame.winfo_reqwidth(), width + 10, 10):
+                x.geometry(f"{i}x{height}+{x_pos}+{y_pos}")
+                x.update()
+                #time.sleep(0.1)
+
+        hide_unhide()
+
+    #######################################################################################################
 
 
 options_buttons_frame=label_frame(x)
@@ -171,7 +215,7 @@ button_widths.append(b2.winfo_reqwidth())
 button_heights.append(b2.winfo_reqheight())
 
 
-b3 = button1(options_buttons_frame, text=f">", command=hide_unhide)
+b3 = button1(options_buttons_frame, text=f">", command= hide_unhide)
 b3.config(font=('Segoe UI', 10),highlightthickness=0)
 b3.pack(side=LEFT,padx=2)
 button_widths.append(b3.winfo_reqwidth())
