@@ -1,11 +1,8 @@
-# Desktop-Switcher/Workspace Manager
-An easy way to switch desktops from terminal.
+# Workspace Manager
 
-If you keep your virtual desktops organized then you'd know how painful it is to switch desktop on windows.
-The experience isn't any better on mac os too.
+ever felt tired of the clutter you made on your desktop by opening apps after apps? 
+Well here's a good solution to keep your workspace clean. 
 
-well, it's now easier on windows, select the desktop u want to switch to, and switch right away based on choice.
-a handy tool ig, i'll be merging it with helpbro anyways. 
 
 
 
