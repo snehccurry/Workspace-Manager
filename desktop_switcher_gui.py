@@ -1,6 +1,8 @@
 from Heema import *
+
 from desktop_switcher import *
-from tkextrafont import Font
+
+import toggle_switch_button
 
 dock_positions=[]
 position='center'
@@ -67,6 +69,7 @@ def do_nothing():
     pass
 
 x = create_dock()
+heema_icons=tkextrafont.Font(file="./heema-icons.ttf", family="heema-icons")
 x.wm_attributes("-topmost", 1)
 x.unbind("<Escape>")
 
@@ -88,48 +91,39 @@ state = "on"  # Initial state of the toggle switch
 
 def open_more_settings():
     settings_page = menu_page(text="Settings")
-    heema_icons = Font(file="heema-icons.ttf", family="heema-icons")
+
+
     apply_theme(settings_page, light_mode)
     make_rounded(settings_page)
     allow_mouse_drag(settings_page)
 
-    toggle_on_symbol = u"\ued0a"  # Symbol for the "on" state
-    toggle_off_symbol = u"\ued09"  # Symbol for the "off" state
 
-    def turn_on_or_off():
-        global state  # Access and update the global variable 'state'
-        toggle_text = toggle_off_symbol if state == "on" else toggle_on_symbol
-        switch_button.config(text=toggle_text)
-        state = "off" if state == "on" else "on"  # Toggle the state
-        print(f"state is: {state}")
-        switch_button.update()
+    def turn_animations_on_or_off():
+        global user_choice_to_animate
+        if(animations_toggle_switch.state()=="off"):
+            user_choice_to_animate.set("False")
+            #print("user's choice is: ",user_choice_to_animate.get())
+            x.update()
+        else:
+            user_choice_to_animate.set("True")
+            print(user_choice_to_animate.get())
+            x.update()
 
-    switch_button = white_label_button(
-        frame_name=settings_page, text=toggle_on_symbol if state== "on" else "off", command=turn_on_or_off
+    animations_toggle_switch = toggle_switch_button.SwitchButton(
+        settings_page,
+        toggle_state=("on" if user_choice_to_animate.get() == "True" else "off"),
+        on_click=turn_animations_on_or_off,
+        font=(heema_icons, 42)
     )
-    switch_button.config(font=(heema_icons, 28))
-    switch_button.pack()
 
-    # left_frame1=left_frame(settings_page)
-    # left_frame1.forget()
-    # left_frame1.pack(side=LEFT,fill=Y,ipadx=x.winfo_screenwidth()*0.02,ipady=0,pady=0)
-    # left_frame1.update()
+    animations_toggle_switch.pack()
 
 
-    # left_frame_buttons_list=[{"name":"hello", "command":do_nothing}]
-    # for i in range(10):
-    #     left_frame_button_i=left_frame_button(frame_name=left_frame1,text=left_frame_buttons_list[0]["name"],command=left_frame_buttons_list[0]["command"])
-    #     left_frame_button_i.config(font=('SegoeUI',14))
 
 
-    # Label1=label(settings_page,text=f"DevChannel 1 user:{os.getlogin()}")
-    # Label1.config(font=('Segoe UI',32))
-    # Label1.pack(side=LEFT,anchor=NW,pady=30,padx=40)
 
-    
-
-    label1=label(settings_page,text="Hold tight, your settings options will be made available soon. on/off"+ toggle_on_symbol +" or " + toggle_off_symbol,font=(heema_icons))
-    label1.place(relx = 0.5, rely = 0.5, anchor = CENTER)
+    #label1=label(settings_page,text="Hold tight, your settings options will be made available soon. on/off"+ toggle_on_symbol +" or " + toggle_off_symbol,font=(heema_icons))
+    #label1.place(relx = 0.5, rely = 0.5, anchor = CENTER)
 
     settings_page.mainloop()
 
@@ -158,7 +152,7 @@ for desktop in desktops:
 
     #if show numbers is enabled. show below
     #b1 = button(desktop_button_frame, text=f"{desktops[desktop]} {desktop}", command=lambda desktop=desktop: open_desktop_by_name(desktop))
-    
+
 
     #if show numbers is not enabled, show the following
     if(show_numbers_before_desktops==False):
@@ -167,7 +161,7 @@ for desktop in desktops:
         b1 = button(desktop_button_frame, text=f"{desktops[desktop]}) {desktop}", command=lambda desktop=desktop: open_desktop_by_name(desktop))
     b1.config(font=('Segoe UI', 10),highlightthickness=0, takefocus=0)
     b1.pack(side=LEFT, padx=5)
-    
+
     # Get the required width and height of the button and add them to the lists
     button_widths.append(b1.winfo_reqwidth())
     button_heights.append(b1.winfo_reqheight())
@@ -177,31 +171,32 @@ for desktop in desktops:
 
 
 hidden=False
-user_choice_to_animate=True
-def hide_unhide(animated = user_choice_to_animate):
+user_choice_to_animate=StringVar()
+user_choice_to_animate.set("False")
+def hide_unhide(animated = user_choice_to_animate.get()):
     global hidden
 
-    if(animated==False):
+    if(animated=="False"):
         if(hidden==False):
             #desktop_button_frame.pack_forget()
             desktop_button_frame.pack_forget()
             #b3.winfo_reqwidth() b0.winfo_reqwidth()
-            
+
             x.geometry(f"{options_buttons_frame.winfo_reqwidth()}x{required_height}+{options_buttons_frame.winfo_rootx()}+{options_buttons_frame.winfo_rooty()}")
             hidden=True
 
         else:
-            
+
             options_buttons_frame.pack_forget()
             desktop_button_frame.pack(side=LEFT)
             options_buttons_frame.pack()
             x.geometry(f"{options_buttons_frame.winfo_reqwidth()+desktop_button_frame.winfo_reqwidth()}x{required_height}+{options_buttons_frame.winfo_rootx()-desktop_button_frame.winfo_reqwidth()}+{options_buttons_frame.winfo_rooty()}")
-            
+
             global position
             hidden=False
     else:
 
-        def hide_unhide():
+        def animate():
             global hidden
             if hidden == False:
                 desktop_button_frame.pack_forget()
@@ -219,7 +214,7 @@ def hide_unhide(animated = user_choice_to_animate):
             height = required_height
             x_pos = options_buttons_frame.winfo_rootx()
             y_pos = options_buttons_frame.winfo_rooty()
-            
+
             for i in range(0, width + 1, 5):
                 x.geometry(f"{i}x{height}+{x_pos}+{y_pos}")
                 x.update()
@@ -230,20 +225,21 @@ def hide_unhide(animated = user_choice_to_animate):
             height = required_height
             x_pos = options_buttons_frame.winfo_rootx() - desktop_button_frame.winfo_reqwidth()
             y_pos = options_buttons_frame.winfo_rooty()
-            
+
             for i in range(options_buttons_frame.winfo_reqwidth(), width + 10, 10):
                 x.geometry(f"{i}x{height}+{x_pos}+{y_pos}")
                 x.update()
                 #time.sleep(0.1)
 
-        hide_unhide()
+
+        animate()
 
     #######################################################################################################
 
 
 options_buttons_frame=label_frame(x)
 options_buttons_frame.pack()
-        
+
 b2 = button1(options_buttons_frame, text=f"⚙️", command=open_more_settings)
 b2.config(font=('Segoe UI', 10),highlightthickness=0)
 b2.pack(side=LEFT, padx=8)
@@ -251,7 +247,7 @@ button_widths.append(b2.winfo_reqwidth())
 button_heights.append(b2.winfo_reqheight())
 
 
-b3 = button1(options_buttons_frame, text=f">", command= hide_unhide)
+b3 = button1(options_buttons_frame, text=f">", command= lambda : hide_unhide(animated=user_choice_to_animate.get()))
 b3.config(font=('Segoe UI', 10),highlightthickness=0)
 b3.pack(side=LEFT,padx=2)
 button_widths.append(b3.winfo_reqwidth())
@@ -281,7 +277,7 @@ def place_dock(position):
         #x.geometry(f"{required_width}x{required_height}+{center_width}+{screen_height_place}")
 
         #test
-        
+
         x.geometry(f"{required_width}x{required_height}+{center_width}+{screen_height_place}")
 
     else:
