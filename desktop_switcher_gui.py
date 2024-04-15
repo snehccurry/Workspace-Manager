@@ -1,8 +1,23 @@
 from Heema import *
 from desktop_switcher import *
+from tkextrafont import Font
 
 dock_positions=[]
 position='center'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def allow_mouse_drag(frame_name):
     window=frame_name
@@ -55,8 +70,9 @@ x = create_dock()
 x.wm_attributes("-topmost", 1)
 x.unbind("<Escape>")
 
-#apply_theme(x, light_mode)
-apply_theme(x,reddish_purple)
+apply_theme(x, light_mode)
+#apply_theme(x,reddish_purple)
+
 
 screen_width_place = int(x.winfo_screenwidth())
 screen_height_place = int(x.winfo_screenheight() * 0.9)
@@ -68,14 +84,32 @@ button_widths = []  # List to store button widths
 button_heights = []  # List to store button heights
 
 
-
-
+state = "on"  # Initial state of the toggle switch
 
 def open_more_settings():
-    settings_page=menu_page(text="Settings")
-    apply_theme(settings_page,light_mode)
+    settings_page = menu_page(text="Settings")
+    heema_icons = Font(file="heema-icons.ttf", family="heema-icons")
+    apply_theme(settings_page, light_mode)
     make_rounded(settings_page)
     allow_mouse_drag(settings_page)
+
+    toggle_on_symbol = u"\ued0a"  # Symbol for the "on" state
+    toggle_off_symbol = u"\ued09"  # Symbol for the "off" state
+
+    def turn_on_or_off():
+        global state  # Access and update the global variable 'state'
+        toggle_text = toggle_off_symbol if state == "on" else toggle_on_symbol
+        switch_button.config(text=toggle_text)
+        state = "off" if state == "on" else "on"  # Toggle the state
+        print(f"state is: {state}")
+        switch_button.update()
+
+    switch_button = white_label_button(
+        frame_name=settings_page, text=toggle_on_symbol if state== "on" else "off", command=turn_on_or_off
+    )
+    switch_button.config(font=(heema_icons, 28))
+    switch_button.pack()
+
     # left_frame1=left_frame(settings_page)
     # left_frame1.forget()
     # left_frame1.pack(side=LEFT,fill=Y,ipadx=x.winfo_screenwidth()*0.02,ipady=0,pady=0)
@@ -92,7 +126,9 @@ def open_more_settings():
     # Label1.config(font=('Segoe UI',32))
     # Label1.pack(side=LEFT,anchor=NW,pady=30,padx=40)
 
-    label1=label(settings_page,text="Hold tight, your settings options will be made available soon.")
+    
+
+    label1=label(settings_page,text="Hold tight, your settings options will be made available soon. on/off"+ toggle_on_symbol +" or " + toggle_off_symbol,font=(heema_icons))
     label1.place(relx = 0.5, rely = 0.5, anchor = CENTER)
 
     settings_page.mainloop()
@@ -141,8 +177,8 @@ for desktop in desktops:
 
 
 hidden=False
-user_choice_animate_hide_unhide=False
-def hide_unhide(animated = user_choice_animate_hide_unhide):
+user_choice_to_animate=True
+def hide_unhide(animated = user_choice_to_animate):
     global hidden
 
     if(animated==False):
@@ -273,5 +309,10 @@ x.bind('<B1-Motion>', Dragging)
 #x.overrideredirect(True)
 
 make_rounded(x)
+
+
+
+# x.bind("<Enter>",make_dock_opaque)
+# x.bind("<Leave>",make_dock_transparent)
 
 x.mainloop()
