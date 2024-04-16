@@ -71,7 +71,8 @@ def do_nothing():
 x = create_dock()
 heema_icons=tkextrafont.Font(file="./heema-icons.ttf", family="heema-icons")
 x.wm_attributes("-topmost", 1)
-x.unbind("<Escape>")
+
+#x.unbind("<Escape>")
 
 apply_theme(x, light_mode)
 #apply_theme(x,reddish_purple)
@@ -91,6 +92,8 @@ state = "on"  # Initial state of the toggle switch
 
 def open_more_settings():
     settings_page = menu_page(text="Settings")
+    settings_page_option_frame= label_frame(settings_page)
+    settings_page_option_frame.pack()
 
 
     apply_theme(settings_page, light_mode)
@@ -109,14 +112,9 @@ def open_more_settings():
             print(user_choice_to_animate.get())
             x.update()
 
-    animations_toggle_switch = toggle_switch_button.SwitchButton(
-        settings_page,
-        toggle_state=("on" if user_choice_to_animate.get() == "True" else "off"),
-        on_click=turn_animations_on_or_off,
-        font=(heema_icons, 42)
-    )
-
-    animations_toggle_switch.pack()
+    label(settings_page_option_frame,text="Animations ").grid(row=0,column=0,sticky="E")
+    animations_toggle_switch = toggle_switch_button.SwitchButton(settings_page_option_frame,toggle_state=("on" if user_choice_to_animate.get() == "True" else "off"),on_click=turn_animations_on_or_off,font=(heema_icons, 42))
+    animations_toggle_switch.grid(row=0,column=1,sticky="E")
 
 
 
