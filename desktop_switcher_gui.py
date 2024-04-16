@@ -3,12 +3,73 @@ from Heema import *
 from desktop_switcher import *
 
 import toggle_switch_button
+#for the config database.
+from tinydb import TinyDB, Query
+import json
+
+
+
+
+
+
+
+#{"_default": {"1": {"animations": "False", "show_labels": "False"}}}
+
+
+
+
+
+
+
+##################### variables
 
 dock_positions=[]
 position='center'
 
 
 
+#default config and user confing
+
+default_settings={
+    "animations":"False",
+    "show_labels":"False",
+    "elgato_on_startup":"False",
+    "type":"default_settings"
+}
+
+user_settings={
+    "animations":"False",
+    "show_labels":"False",
+    "elgato_on_startup":"False",
+    "type":"user_settings"
+}
+
+
+config_file="./config.json"
+
+#connecting to db
+
+db = TinyDB(config_file)
+query_instance = Query()
+
+
+
+#getting the settings from the database
+
+default_settings_from_db=db.search(query_instance.type=="default_settings")
+print(f"default_settings in db is: {default_settings_from_db}")
+
+user_settings_from_db=db.search(query_instance.type=="user_settings")
+print(f"user_settings in db is: {user_settings_from_db}")
+
+
+
+#creating settings if they don't exist.
+
+if(default_settings_from_db==[]):
+    db.insert(default_settings)
+if(user_settings_from_db==[]):
+    db.insert(user_settings)
 
 
 
@@ -21,47 +82,14 @@ position='center'
 
 
 
-def allow_mouse_drag(frame_name):
-    window=frame_name
-    lastClickX = 0
-    lastClickY = 0
-
-    def SaveLastClickPos(event):
-        nonlocal lastClickX, lastClickY
-        lastClickX = event.x
-        lastClickY = event.y
-
-    def Dragging(event):
-        nonlocal lastClickX, lastClickY
-        x = event.x_root - lastClickX
-        y = event.y_root - lastClickY
-        window.geometry(f"+{x}+{y}")
-
-    window.bind('<Button-1>', SaveLastClickPos)
-    window.bind('<B1-Motion>', Dragging)
 
 
 
 
-def make_rounded(frame_name):
-    root=frame_name
-    # Get the handle of the tkinter window
-    # Constants from Windows API
-    DWMWA_WINDOW_CORNER_PREFERENCE = 33
 
-    # Function prototypes
-    DwmSetWindowAttribute = ctypes.windll.dwmapi.DwmSetWindowAttribute
 
-    hwnd = ctypes.windll.user32.GetForegroundWindow()
 
-    #print(hwnd)
-    root.update()
-    # Set the corner preference
-    # 33 corresponds to DWMWA_WINDOW_CORNER_PREFERENCE
-    preference = 2  # 0 - Default, 1 - BottomRight, 2 - BottomLeft, 3 - TopRight, 4 - TopLeft
-    get_parent = ctypes.windll.user32.GetParent
-    hwnd = get_parent(root.winfo_id())
-    DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, ctypes.byref(ctypes.c_uint(preference)), ctypes.sizeof(ctypes.c_uint))
+
 
 
 ##########################3 above functions are the new functions
@@ -69,6 +97,26 @@ def do_nothing():
     pass
 
 x = create_dock()
+
+
+
+#string vars config comes here:
+user_choice_to_animate=StringVar()
+show_numbers_before_desktops=StringVar()
+
+
+
+
+user_choice_to_animate.set(db.search(query_instance.type=="user_settings")[0]["animations"])
+
+show_numbers_before_desktops.set(db.search(query_instance.type=="user_settings")[0]["animations"])
+
+
+
+
+
+
+
 heema_icons=tkextrafont.Font(file="./heema-icons.ttf", family="heema-icons")
 x.wm_attributes("-topmost", 1)
 
@@ -105,18 +153,28 @@ def open_more_settings():
         global user_choice_to_animate
         if(animations_toggle_switch.state()=="off"):
             user_choice_to_animate.set("False")
+            db.update({"animations":"False"},query_instance.type=="user_settings")
+            #print(f"database value is: {db.search(query_instance.type=="user_settings")[0]["animations"]}")
             #print("user's choice is: ",user_choice_to_animate.get())
+            user_choice_to_animate.set(db.search(query_instance.type=="user_settings")[0]["animations"])
             x.update()
         else:
-            user_choice_to_animate.set("True")
-            print(user_choice_to_animate.get())
+            db.update({"animations": "True"}, query_instance.type == "user_settings")
+            #print(f"database value is: {db.search(query_instance.type == "user_settings")[0]["animations"]}")
+            user_choice_to_animate.set(db.search(query_instance.type == "user_settings")[0]["animations"])
             x.update()
 
     label(settings_page_option_frame,text="Animations ").grid(row=0,column=0,sticky="E")
     animations_toggle_switch = toggle_switch_button.SwitchButton(settings_page_option_frame,toggle_state=("on" if user_choice_to_animate.get() == "True" else "off"),on_click=turn_animations_on_or_off,font=(heema_icons, 42))
+
     animations_toggle_switch.grid(row=0,column=1,sticky="E")
 
 
+    def show_labels():
+        pass
+
+    label(settings_page_option_frame,text="Show numbers before Desktop").grid(row=1,column=0,sticky="E")
+    #show_numbers_before_desktops = toggle_switch_button.SwitchButton(settings_page_option_frame, toggle_state=("off" if user_choice_to_show_toggle.get() == "True" else "off"),on_click=show_labels())
 
 
 
@@ -169,8 +227,7 @@ for desktop in desktops:
 
 
 hidden=False
-user_choice_to_animate=StringVar()
-user_choice_to_animate.set("False")
+
 def hide_unhide(animated = user_choice_to_animate.get()):
     global hidden
 
