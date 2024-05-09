@@ -14,7 +14,7 @@ Make sure to rename your desktop to something other than ("Default Destkop") to 
 
 
 
-todos:
+todos: </br>
 0) Add a toggle switch for turning on and off animations.
 1) Add a toggle switch for showing labels or not.
 2) Add a toggle switch for turning on and off theme.
