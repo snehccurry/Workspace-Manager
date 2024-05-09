@@ -1,4 +1,4 @@
-help me create workspace manager readme file, keep it organized and maintain hierachy, # Workspace Manager
+<h1> # Workspace Manager </h1>
 
 Ever felt tired of the clutter you made on your desktop by opening apps after apps? 
 Well here's a good solution to keep your workspace clean. Use Workspace Manager to create workspaces, keep your desktop orgranized. 
