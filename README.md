@@ -21,8 +21,8 @@ Make sure to rename your desktop to something other than ("Default Destkop") to 
 
 
 
-<h3> todos: </h3>
-1) Add a toggle switch for turning on and off animations. (done) </br>
+<h3> Todos: </h3>
+1) Add a toggle switch for turning on and off animations. (done)
 2) Add a toggle switch for showing labels or not. </br>
 3) Add a toggle switch for turning on and off theme. </br>
 4) Add a hotkey </br>
