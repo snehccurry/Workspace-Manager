@@ -4,7 +4,7 @@ Ever felt tired of the clutter you made on your desktop by opening apps after ap
 Well here's a good solution to keep your workspace clean. Use Workspace Manager to create workspaces, keep your desktop orgranized. 
 
 
-Supported OS: Windows 11.
+<h1>Supported OS: Windows 11. </h1>
 
 
 Requirements:
