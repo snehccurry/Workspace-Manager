@@ -27,7 +27,7 @@ Make sure to rename your desktop to something other than ("Default Destkop") to 
 3) Add a toggle switch for turning on and off theme.
 4) Add a hotkey
 5) Add a elgato type menu/software for macro tasks.
-6) Add OBS support.
+6) Add OBS support. 
 7) OS command to switch between desktops from the terminal itself.
 
 
