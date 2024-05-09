@@ -1,7 +1,7 @@
 <h1> # Workspace Manager </h1>
 
-Ever felt tired of the clutter you made on your desktop by opening apps after apps? 
-Well here's a good solution to keep your workspace clean. Use Workspace Manager to create workspaces, keep your desktop orgranized. 
+<h5> Ever felt tired of the clutter you made on your desktop by opening apps after apps? 
+Well here's a good solution to keep your workspace clean. Use Workspace Manager to create workspaces, keep your desktop orgranized. </h5>
 
 
 <h1>Supported OS: Windows 11. </h1>
