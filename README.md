@@ -1,44 +1,40 @@
-<h1> # Workspace Manager </h1>
+## Workspace Manager
 
-<h5> Ever felt tired of the clutter you made on your desktop by opening apps after apps? 
-Well here's a good solution to keep your workspace clean. Use Workspace Manager to create workspaces, keep your desktop orgranized. </h5>
+**Keep Your Desktop Organized with Ease**
 
+Tired of a cluttered desktop with overflowing apps? Workspace Manager offers a simple yet powerful solution to organize your workspace effectively. Create dedicated workspaces for different tasks, promoting focus and enhancing productivity.
 
-<h1>Supported OS: Windows 11. </h1>
+**Supported Operating System:**
 
+- Windows 11
 
-<h2>Requirements:</h2>
+**Requirements:**
 
-Make sure to rename your desktop to something other than ("Default Destkop") to something like, VS Code, Output, Music, etc. 
+For optimal functionality, ensure your desktops have custom names instead of the default "Desktop 1," "Desktop 2," etc. Rename them to reflect their intended purpose (e.g., "VS Code," "Output," "Music").
 
+**Current Features:**
 
+- Seamless workspace creation: Effortlessly establish separate workspaces to optimize your workflow.
+- Improved desktop organization: Maintain a clean and organized desktop by allocating apps to dedicated workspaces. (Existing feature)
+- (Optional) Toggle animations (if implemented): Control the visual aesthetics of workspace transitions based on your preference. (Future feature)
+- (Optional) Toggle label visibility (if implemented): Decide whether to display workspace titles for enhanced clarity. (Future feature)
 
+**Upcoming Features (Next Build):**
 
-<h3> todos: </h3>
-1) Add a toggle switch for turning on and off animations. (done)
-2) Add a toggle switch for showing labels or not.
-3) Add a toggle switch for turning on and off theme.
-4) Add a hotkey
-5) Add a elgato type menu/software for macro tasks.
-6) Add OBS support.
-7) OS command to switch between desktops from the terminal itself.
+- Enhanced visual transitions with customizable animations (for a more dynamic user experience).
+- Workspace numbering for efficient switching: Quickly jump between workspaces using assigned numbers or names.
+- Theme options: Personalize your Workspace Manager experience with a variety of themes.
+- Keyboard shortcuts: Employ keyboard shortcuts for streamlined workspace management.
+- Macro support (inspired by Elgato Stream Deck): Configure and execute powerful macros tailored to your workflows using keyboard shortcuts.
+- OBS integration (if applicable): Establish seamless integration with OBS software (if applicable) for enhanced workflow management within your content creation process.
+- OS terminal commands: Leverage terminal commands for workspace switching directly from the command line.
 
+**Customization and Updates:**
 
+Workspace Manager prioritizes user empowerment and ongoing improvements. We firmly believe in providing customization options and actively work on updates to deliver the best possible user experience.
 
+**Special Thanks:**
 
-<h3> Features in next build:</h3>
+A heartfelt thank you to @JariPennanen (https://github.com/git) for his invaluable contribution to this project. His Rust-based VirtualDesktopAccessor library serves as a foundation for Workspace Manager's functionality.
 
-1) Animations
-2) Numbered desktops along with names for faster switching
-3) Theme options
-4) Keyboard shortcuts.
-5) A elgato type of menu which can help u set macros that can be turned on or off with a keyboard shortcut.
-6) Add obs support
-7) OS command to switch between desktops.
-
-Customization power for all, and updates.
-
-
-
-A great thanks to @JariPennanen https://github.com/Ciantic for the dll, and his project VirtualDesktopAccessor written in Rust. 
-<
+We appreciate your interest in Workspace Manager! We're continuously striving to enhance your desktop management experience. Keep an eye out for exciting updates in the next build.
