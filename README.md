@@ -8,15 +8,15 @@ Well here's a good solution to keep your workspace clean. Use Workspace Manager 
 
 ** Supported OS: Windows 11. **
 
-
-
-
-
-
-
 <h2>Requirements:</h2>
 
 Make sure to rename your desktop to something other than ("Default Destkop") to something like, VS Code, Output, Music, etc. 
+
+
+
+
+![image](https://github.com/snehccurry/Workspace-Manager/assets/59841219/2eae7b7a-397c-48d0-a8b1-1e232700ec23)
+
 
 
 
