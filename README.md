@@ -15,7 +15,7 @@ Make sure to rename your desktop to something other than ("Default Destkop") to 
 
 
 todos: 
-1) <strike> Add a toggle switch for turning on and off animations. </strike>
+1) Add a toggle switch for turning on and off animations. (done)
 2) Add a toggle switch for showing labels or not.
 3) Add a toggle switch for turning on and off theme.
 4) Add a hotkey
