@@ -14,22 +14,26 @@ Make sure to rename your desktop to something other than ("Default Destkop") to 
 
 
 
-todos: </br>
-0) Add a toggle switch for turning on and off animations.
-1) Add a toggle switch for showing labels or not.
-2) Add a toggle switch for turning on and off theme.
-3) Add a hotkey
-4) Add a elgato type software for macro tasks.
-5) Add OBS support.
-6) OS command to switch between desktops from the terminal itself.
+todos: 
+1) <strike> Add a toggle switch for turning on and off animations. </strike>
+2) Add a toggle switch for showing labels or not.
+3) Add a toggle switch for turning on and off theme.
+4) Add a hotkey
+5) Add a elgato type menu/software for macro tasks.
+6) Add OBS support.
+7) OS command to switch between desktops from the terminal itself.
 
 
 
 Features in next build:
 
 1) Animations
-2) Keyboard shortcuts
-3) Macros like elgato for quick tasks.
+2) Numbered desktops along with names for faster switching
+3) Theme options
+4) Keyboard shortcuts.
+5) A elgato type of menu which can help u set macros that can be turned on or off with a keyboard shortcut.
+6) Add obs support
+7) OS command to switch between desktops.
 
 Customization power for all, and updates.
 
