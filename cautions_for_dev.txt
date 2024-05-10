@@ -1,0 +1,4 @@
+1) always include the heema-icons.ttf file along with the executable otherwise it won't work, or add it in the installer in future.
+2) always include the ttkextrafonts form libs idk why but for some reason pyinstaller doesn't recognize it.
+3) don't keep it in user/system32 it won't work as it needs permission.
+4) stay calm and keep coding, life is too short to waste on only code.

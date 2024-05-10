@@ -1,3 +1,4 @@
+import tkextrafont
 from Heema import *
 
 from desktop_switcher import *
@@ -71,7 +72,8 @@ def start():
 
     user_choice_to_show_numbers_before_desktops.set(db.search(query_instance.type == "user_settings")[0]["show_labels"])
 
-    heema_icons = tkextrafont.Font(file="./heema-icons.ttf", family="heema-icons")
+    #heema_icons = tkextrafont.Font(file="./heema-icons.ttf", family="heema-icons")
+    heema_icons = tkextrafont.Font(file="heema-icons.ttf", family="heema-icons")
     x.wm_attributes("-topmost", 1)
 
     # x.unbind("<Escape>")
