@@ -1,50 +1,63 @@
- <h1> # Workspace Manager </h1>
- 
-<h5> Ever felt tired of the clutter you made on your desktop by opening apps after apps? 
-Well here's a good solution to keep your workspace clean. Use Workspace Manager to create workspaces, keep your desktop orgranized. </h5>
+# Workspace Manager
+
+## Keep Your Desktop Organized and Productive
+
+Tired of the clutter that builds up when you open multiple apps? **Workspace Manager** is here to help you maintain a clean and organized desktop environment by allowing you to create customized workspaces. With this tool, you can effortlessly switch between different desktops and keep your workflow smooth and efficient.
 
 
 
+---
 
-** Supported OS: Windows 11. **
+### **System Requirements:**
 
-<h2>Requirements:</h2>
+1) Windows 11 or above
 
-Make sure to rename your desktop to something other than ("Default Destkop") to something like, VS Code, Output, Music, etc. 
+Before you get started, make sure to rename your desktop to something more meaningful than the default name ("Default Desktop"). Try something like "VS Code," "Output," "Music," or any name that suits your needs.
 
+---
 
+![Workspace Manager Screenshot](https://github.com/snehccurry/Workspace-Manager/assets/59841219/2eae7b7a-397c-48d0-a8b1-1e232700ec23)
 
+---
 
-![image](https://github.com/snehccurry/Workspace-Manager/assets/59841219/2eae7b7a-397c-48d0-a8b1-1e232700ec23)
+### **How to Use:**
 
+1. **Keyboard Shortcuts**: Instantly switch to any of your created desktops using custom keyboard shortcuts.
+2. **Mouse Interaction**: Right-click to open a desktop menu near your cursor for easy switching between desktops.
 
+---
 
+### **Upcoming Features and To-Dos:**
 
+1. **Completed**:
+   - Add a toggle to turn desktop animation on/off.
+   
+2. **In Progress**:
+   - Add a toggle to show or hide desktop labels.
+   - Implement a theme toggle switch for visual customization.
+   - Create customizable keyboard shortcuts for quicker workspace access.
+   - Develop an Elgato-like macro menu for easy task automation.
+   - Add OBS support for seamless streaming integration.
+   - Provide a terminal command to switch desktops from the command line.
 
-<h3> Todos: </h3>
-1) Add a toggle switch for turning on and off animations. (done)
-2) Add a toggle switch for showing labels or not. </br>
-3) Add a toggle switch for turning on and off theme. </br>
-4) Add a hotkey </br>
-5) Add a elgato type menu/software for macro tasks. </br>
-6) Add OBS support. </br>
-7) OS command to switch between desktops from the terminal itself. </br>
+---
 
+### **Features in the Next Build:**
 
+- **Animations**: Smooth transitions when switching between desktops.
+- **Numbered Desktops**: Quick and easy access with numbered workspaces and their respective names.
+- **Theme Options**: Multiple themes for customizing the appearance of your workspace.
+- **Keyboard Shortcuts**: Customizable hotkeys for faster desktop switching.
+- **Macro Menu**: Similar to Elgato's, allowing you to assign and trigger macros with a hotkey.
+- **OBS Support**: Integration with OBS for managing streaming workflows.
+- **Terminal Commands**: Switch between desktops directly from the command line for added efficiency.
 
+---
 
-<h3> Features in next build:</h3>
+### **Acknowledgments:**
 
-1) Animations
-2) Numbered desktops along with names for faster switching
-3) Theme options
-4) Keyboard shortcuts.
-5) A elgato type of menu which can help u set macros that can be turned on or off with a keyboard shortcut.
-6) Add obs support
-7) OS command to switch between desktops.
+A huge thank you to [@JariPennanen](https://github.com/Ciantic) for his excellent work on the **VirtualDesktopAccessor** DLL, written in Rust, which powers this tool.
 
-Customization power for all, and updates.
+---
 
-
-
-A great thanks to @JariPennanen https://github.com/Ciantic for the dll, and his project VirtualDesktopAccessor written in Rust. 
+With **Workspace Manager**, you can finally regain control over your desktop and create a workspace tailored to your needs—whether for coding, media creation, or any other task. Stay tuned for updates, and enjoy the flexibility of an ever-improving tool!

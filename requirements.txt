@@ -1,0 +1,8 @@
+BlurWindow==1.2.1
+Heema==2.0.0.9
+pillow==11.0.0
+PyAudio==0.2.14
+pynput==1.7.7
+six==1.17.0
+tinydb==4.8.2
+tkextrafont==0.6.3

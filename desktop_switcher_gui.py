@@ -1,6 +1,6 @@
 import tkextrafont
 from Heema import *
-
+from pynput import keyboard, mouse
 from desktop_switcher import *
 
 import toggle_switch_button
@@ -22,14 +22,16 @@ def start():
         "animations": "False",
         "show_labels": "False",
         "elgato_on_startup": "False",
-        "type": "default_settings"
+        "type": "default_settings",
+        "auto_hide": "True"
     }
 
     user_settings = {
         "animations": "False",
         "show_labels": "False",
         "elgato_on_startup": "False",
-        "type": "user_settings"
+        "type": "user_settings",
+        "auto_hide": "True"
     }
 
     config_file = "./config.json"
@@ -65,18 +67,21 @@ def start():
     # string vars config comes here:
     global user_choice_to_animate
     global user_choice_to_show_numbers_before_desktops
+    global user_choice_to_auto_hide
     user_choice_to_animate = StringVar()
     user_choice_to_show_numbers_before_desktops = StringVar()
+    user_choice_to_auto_hide = StringVar()
+
 
     user_choice_to_animate.set(db.search(query_instance.type == "user_settings")[0]["animations"])
-
     user_choice_to_show_numbers_before_desktops.set(db.search(query_instance.type == "user_settings")[0]["show_labels"])
+    user_choice_to_auto_hide.set(db.search(query_instance.type == "user_settings")[0]["auto_hide"])
 
     #heema_icons = tkextrafont.Font(file="./heema-icons.ttf", family="heema-icons")
     heema_icons = tkextrafont.Font(file="heema-icons.ttf", family="heema-icons")
     x.wm_attributes("-topmost", 1)
 
-    # x.unbind("<Escape>")
+    x.unbind("<Escape>")
 
     # apply_theme(x, light_mode)
     # apply_theme(x, light_mode)
@@ -195,6 +200,9 @@ def start():
     global hidden
     hidden = False
 
+    def auto_hide():
+        x.withdraw()
+
 
     def hide_unhide(animated=user_choice_to_animate.get()):
         global hidden
@@ -270,15 +278,29 @@ def start():
     button_widths.append(b2.winfo_reqwidth())
     button_heights.append(b2.winfo_reqheight())
 
+    auto_hide_btn = button1(options_buttons_frame, text=f"⬇️", command=auto_hide)
+    auto_hide_btn.config(font=('Segoe UI', 10), highlightthickness=0)
+    auto_hide_btn.pack(side=LEFT, padx=2)
+
     b3 = button1(options_buttons_frame, text=f">", command=lambda: hide_unhide(animated=user_choice_to_animate.get()))
     b3.config(font=('Segoe UI', 10), highlightthickness=0)
     b3.pack(side=LEFT, padx=2)
     button_widths.append(b3.winfo_reqwidth())
     button_heights.append(b3.winfo_reqheight())
 
+
+    # auto hide symbol options: 👀🧿🚫⛔⭕🔻️➖ ️⬇️➖✖️
+
+
     b0 = button1(options_buttons_frame, text=f" drag 🤚", command=do_nothing)
     b0.config(font=('Segoe UI', 10), highlightthickness=0)
     b0.pack(side=LEFT, padx=2)
+
+
+
+
+
+
     button_widths.append(b0.winfo_reqwidth())
     button_heights.append(b0.winfo_reqheight())
 
@@ -334,8 +356,43 @@ def start():
     # x.bind("<Enter>",make_dock_opaque)
     # x.bind("<Leave>",make_dock_transparent)
 
+
+    # Mouse event handling
+    def on_mouse_click(X, Y, button, pressed):
+        if pressed:
+            if button == mouse.Button.x1:
+                # Get screen width and height
+                screen_width = x.winfo_screenwidth()
+                screen_height = x.winfo_screenheight()
+
+                # Calculate the new position, making sure the window doesn't go out of bounds
+                new_x = min(max(X, 0), screen_width - x.winfo_width())
+                new_y = min(max(Y, 0), screen_height - x.winfo_height())
+
+                x.deiconify()
+                x.state("normal")
+                x.geometry(f"+{new_x}+{new_y}")
+
+
+    mouse_listener = mouse.Listener(on_click=on_mouse_click, on_scroll=None)
+    mouse_listener.start()
+
+
+    def auto_hide(e):
+        x.withdraw()
+
+
+
+
+
+
+    x.bind("<FocusOut>", auto_hide)
+
+
+
+
+
+
     x.mainloop()
-
-
 
 start()
