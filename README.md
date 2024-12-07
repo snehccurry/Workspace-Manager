@@ -23,7 +23,7 @@ Before you get started, make sure to rename your desktop to something more meani
 ### **How to Use:**
 
 1. **Keyboard Shortcuts**: Instantly switch to any of your created desktops using custom keyboard shortcuts.
-2. **Mouse Interaction**: press mouse button-4 to open a desktop menu near your cursor for easy switching between desktops.
+2. **Mouse Interaction**: press mouse button-4 to open a desktop menu near your cursor for easy switching between desktops. (in future it can be configured.)
 
 ---
 
